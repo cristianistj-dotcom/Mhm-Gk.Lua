@@ -15,9 +15,9 @@ pcall(function()
     end
 end)
 
-if ENV.LUXZ_HUB_CLEANUP then
-    pcall(ENV.LUXZ_HUB_CLEANUP)
-    ENV.LUXZ_HUB_CLEANUP = nil
+if ENV.Master_trap_CLEANUP then
+    pcall(ENV.Master_trap_CLEANUP)
+    ENV.Master_trap_CLEANUP = nil
 end
 
 local Terrain = Workspace:FindFirstChildOfClass("Terrain")
@@ -50,7 +50,7 @@ pcall(function()
 end)
 
 local GUI = Instance.new("ScreenGui")
-GUI.Name = "LuxzHub"
+GUI.Name = "Mastertrap"
 GUI.ResetOnSpawn = false
 GUI.IgnoreGuiInset = true
 GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -137,7 +137,7 @@ local function ApplySkybox(data)
         if v:IsA("Sky") then v:Destroy() end
     end
     local s = Instance.new("Sky")
-    s.Name = "LuxzSky"
+    s.Name = "Mastertrap"
     s.SkyboxBk = FixAsset(data.Bk)
     s.SkyboxDn = FixAsset(data.Dn)
     s.SkyboxFt = FixAsset(data.Ft)
@@ -366,10 +366,10 @@ local BallFireEnabled = false
 local function AddFire(ball)
     if not ball or not ball:IsA("BasePart") or not IsBall(ball) or ball:FindFirstChild("LuxzBallFire") then return end
     local marker = Instance.new("BoolValue")
-    marker.Name = "LuxzBallFire"
+    marker.Name = "MastertrapllFire"
     marker.Parent = ball
     local fire = Instance.new("Fire")
-    fire.Name = "LuxzFire"
+    fire.Name = "MasterFire"
     fire.Color = Color3.fromRGB(255,80,0)
     fire.SecondaryColor = Color3.fromRGB(255,220,0)
     fire.Size = 5
