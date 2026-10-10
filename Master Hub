@@ -1216,12 +1216,12 @@ local function DestroyMasterInstances()
                 local name = tostring(obj.Name)
 
                 if name == "MasterHub"
-                    or name == "MasterHubExit"
-                    or name == "MasterFollowToggle"
-                    or name == "MasterFollowLock"
-                    or name == "MasterBallFire"
-                    or name == "MasterFire"
-                    or name == "MasterSky"
+                    or name == "LuxzHubExit"
+                    or name == "LuxzFollowToggle"
+                    or name == "LuxzFollowLock"
+                    or name == "LuxzBallFire"
+                    or name == "LuxzrFire"
+                    or name == "LuxzSky"
                     or string.sub(name, 1, 5) == "Master_"
                 then
                     pcall(function()
@@ -1368,7 +1368,7 @@ local function FinishHub()
     title.BackgroundTransparency = 1
     title.Text = "MASTER HUB"
     title.TextColor3 = Color3.new(1,1,1)
-    title.Font = Enum.Font.GothamBlack
+    title.Font = Enum.Font.GothamWhite
     title.TextSize = 34
     title.ZIndex = 5
     title.Parent = exitFrame
