@@ -32,19 +32,19 @@ local function parentGui(gui)
         end
     end)
     if not ok or not gui.Parent then
-        gui.Parent = Player:WaitForChild("PlayerGui")
+        gui.Parent = Player:WaitForChild("TCS_SKILLS777")
     end
 end
 
 pcall(function()
-    local old = game.CoreGui:FindFirstChild("LuxzHub")
+    local old = game.CoreGui:FindFirstChild("MasterHub")
     if old then old:Destroy() end
 end)
 
 pcall(function()
     local pg = Player:FindFirstChild("PlayerGui")
     if pg then
-        local old = pg:FindFirstChild("LuxzHub")
+        local old = ("Mastertrap")
         if old then old:Destroy() end
     end
 end)
