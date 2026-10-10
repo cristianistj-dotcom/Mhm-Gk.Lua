@@ -21,7 +21,7 @@ if ENV.Master_trap_CLEANUP then
 end
 
 local Terrain = Workspace:FindFirstChildOfClass("Terrain")
-local IMAGE = "rbxthumb://type=Asset&id={ASSET_ID}&w=420&h=420"
+local IMAGE = "rbxthumb://type=Asset&id=99464333170543&w=420&h=420"
 local function parentGui(gui)
     local ok = pcall(function()
         if gethui then
