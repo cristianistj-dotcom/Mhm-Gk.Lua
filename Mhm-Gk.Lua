@@ -1368,7 +1368,7 @@ local function FinishHub()
     title.BackgroundTransparency = 1
     title.Text = "MASTER HUB"
     title.TextColor3 = Color3.new(1,1,1)
-    title.Font = Enum.Font.GothamWhite
+    title.Font = Enum.Font.GothamBlack
     title.TextSize = 34
     title.ZIndex = 5
     title.Parent = exitFrame
