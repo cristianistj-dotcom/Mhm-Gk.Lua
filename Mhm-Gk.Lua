@@ -1,7 +1,3 @@
--- MASTER HUB
--- Creator:Mastezin
--- Roblox:juniinxz_99
--- Friends: TCS_SKILLS777
 
 local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
