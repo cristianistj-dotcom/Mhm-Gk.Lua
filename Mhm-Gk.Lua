@@ -1,3 +1,7 @@
+-- MASTER HUB
+-- Creator:Mastezin
+-- Roblox:juniinxz_99
+-- Friends: TCS_SKILLS777
 
 local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
@@ -15,13 +19,14 @@ pcall(function()
     end
 end)
 
-if ENV.Master_trap_CLEANUP then
-    pcall(ENV.Master_trap_CLEANUP)
-    ENV.Master_trap_CLEANUP = nil
+if ENV.LUXZ_HUB_CLEANUP then
+    pcall(ENV.LUXZ_HUB_CLEANUP)
+    ENV.LUXZ_HUB_CLEANUP = nil
 end
 
 local Terrain = Workspace:FindFirstChildOfClass("Terrain")
 local IMAGE = "rbxthumb://type=Asset&id=99464333170543&w=420&h=420"
+
 local function parentGui(gui)
     local ok = pcall(function()
         if gethui then
@@ -31,25 +36,25 @@ local function parentGui(gui)
         end
     end)
     if not ok or not gui.Parent then
-        gui.Parent = Player:WaitForChild("TCS_SKILLS777")
+        gui.Parent = Player:WaitForChild("PlayerGui")
     end
 end
 
 pcall(function()
-    local old = game.CoreGui:FindFirstChild("MasterHub")
+    local old = game.CoreGui:FindFirstChild("LuxzHub")
     if old then old:Destroy() end
 end)
 
 pcall(function()
     local pg = Player:FindFirstChild("PlayerGui")
     if pg then
-        local old = ("Mastertrap")
+        local old = pg:FindFirstChild("LuxzHub")
         if old then old:Destroy() end
     end
 end)
 
 local GUI = Instance.new("ScreenGui")
-GUI.Name = "Mastertrap"
+GUI.Name = "LuxzHub"
 GUI.ResetOnSpawn = false
 GUI.IgnoreGuiInset = true
 GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -136,7 +141,7 @@ local function ApplySkybox(data)
         if v:IsA("Sky") then v:Destroy() end
     end
     local s = Instance.new("Sky")
-    s.Name = "Mastertrap"
+    s.Name = "LuxzSky"
     s.SkyboxBk = FixAsset(data.Bk)
     s.SkyboxDn = FixAsset(data.Dn)
     s.SkyboxFt = FixAsset(data.Ft)
@@ -365,10 +370,10 @@ local BallFireEnabled = false
 local function AddFire(ball)
     if not ball or not ball:IsA("BasePart") or not IsBall(ball) or ball:FindFirstChild("LuxzBallFire") then return end
     local marker = Instance.new("BoolValue")
-    marker.Name = "MastertrapllFire"
+    marker.Name = "LuxzBallFire"
     marker.Parent = ball
     local fire = Instance.new("Fire")
-    fire.Name = "MasterFire"
+    fire.Name = "LuxzFire"
     fire.Color = Color3.fromRGB(255,80,0)
     fire.SecondaryColor = Color3.fromRGB(255,220,0)
     fire.Size = 5
@@ -384,7 +389,7 @@ local function ToggleFire()
         end
     else
         for _, v in ipairs(Workspace:GetDescendants()) do
-            if v.Name == "MasterHub1lFire" or v.Name == "MasterHubFire" then
+            if v.Name == "LuxzBallFire" or v.Name == "LuxzFire" then
                 pcall(function() v:Destroy() end)
             end
         end
@@ -717,7 +722,7 @@ local SavedLighting = {
     FogStart=Lighting.FogStart,
     FogEnd=Lighting.FogEnd
 }
-local MasterGraphicEffects = {}
+local LuxzGraphicEffects = {}
 
 local function SaveGraphicObject(obj)
     if SavedGraphicObjects[obj] then return end
@@ -736,11 +741,11 @@ local function SaveLightingEffect(obj)
     end
 end
 
-local function DestroyMasterGraphicEffects()
-    for _, effect in ipairs(MaterGraphicEffects) do
+local function DestroyLuxzGraphicEffects()
+    for _, effect in ipairs(LuxzGraphicEffects) do
         if effect and effect.Parent then pcall(function() effect:Destroy() end) end
     end
-    MasterGraphicEffects = {}
+    LuxzGraphicEffects = {}
 end
 
 local function RestoreOriginalPostEffects()
@@ -762,22 +767,22 @@ local function AddGraphicEffect(className, props)
     local effect = Instance.new(className)
     for k, v in pairs(props) do effect[k] = v end
     effect.Parent = Lighting
-    table.insert(MasterGraphicEffects, effect)
+    table.insert(LuxzGraphicEffects, effect)
     return effect
 end
 
 local function ApplyCinematicShader()
-    DestroyMasterGraphicEffects()
+    DestroyLuxzGraphicEffects()
     RestoreOriginalPostEffects()
     GraphicsMode = "CINEMATIC"
     Lighting.Brightness = 2.2
     Lighting.ExposureCompensation = 0.12
     Lighting.GlobalShadows = true
-    AddGraphicEffect("ColorCorrectionEffect",{Name="Master_CinematicColor",Brightness=0.02,Contrast=0.18,Saturation=0.18,TintColor=Color3.fromRGB(255,242,225)})
-    AddGraphicEffect("BloomEffect",{Name="Master_CinematicBloom",Intensity=0.45,Size=28,Threshold=1.1})
-    AddGraphicEffect("SunRaysEffect",{Name="Master_CinematicSun",Intensity=0.06,Spread=0.8})
+    AddGraphicEffect("ColorCorrectionEffect",{Name="Luxz_CinematicColor",Brightness=0.02,Contrast=0.18,Saturation=0.18,TintColor=Color3.fromRGB(255,242,225)})
+    AddGraphicEffect("BloomEffect",{Name="Luxz_CinematicBloom",Intensity=0.45,Size=28,Threshold=1.1})
+    AddGraphicEffect("SunRaysEffect",{Name="Luxz_CinematicSun",Intensity=0.06,Spread=0.8})
     local a = Instance.new("Atmosphere")
-    a.Name = "Master_CinematicAtmosphere"
+    a.Name = "Luxz_CinematicAtmosphere"
     a.Density = 0.22
     a.Offset = 0.05
     a.Color = Color3.fromRGB(210,220,255)
@@ -785,7 +790,7 @@ local function ApplyCinematicShader()
     a.Glare = 0.12
     a.Haze = 1.2
     a.Parent = Lighting
-    table.insert(MasterGraphicEffects, a)
+    table.insert(LuxzGraphicEffects, a)
 end
 
 local function ApplyVibrantShader()
@@ -796,7 +801,7 @@ local function ApplyVibrantShader()
     Lighting.ExposureCompensation = 0.1
     Lighting.GlobalShadows = true
     AddGraphicEffect("ColorCorrectionEffect",{Name="Luxz_VibrantColor",Brightness=0.04,Contrast=0.12,Saturation=0.45})
-    AddGraphicEffect("BloomEffect",{Name="Master_VibrantBloom",Intensity=0.25,Size=20,Threshold=1.4})
+    AddGraphicEffect("BloomEffect",{Name="Luxz_VibrantBloom",Intensity=0.25,Size=20,Threshold=1.4})
 end
 
 local function ApplyDarkShader()
@@ -807,21 +812,21 @@ local function ApplyDarkShader()
     Lighting.ExposureCompensation = -0.25
     Lighting.GlobalShadows = true
     AddGraphicEffect("ColorCorrectionEffect",{Name="Luxz_DarkColor",Brightness=-0.07,Contrast=0.30,Saturation=-0.05,TintColor=Color3.fromRGB(205,215,255)})
-    AddGraphicEffect("BloomEffect",{Name="Master_DarkBloom",Intensity=0.12,Size=16,Threshold=1.5})
+    AddGraphicEffect("BloomEffect",{Name="Luxz_DarkBloom",Intensity=0.12,Size=16,Threshold=1.5})
 end
 
 local function ApplyColdShader()
-    DestroyMasterGraphicEffects()
+    DestroyLuxzGraphicEffects()
     RestoreOriginalPostEffects()
     GraphicsMode = "COLD"
     Lighting.Brightness = 2
     Lighting.GlobalShadows = true
-    AddGraphicEffect("ColorCorrectionEffect",{Name="Master_ColdColor",Contrast=0.17,Saturation=0.08,TintColor=Color3.fromRGB(185,215,255)})
-    AddGraphicEffect("BloomEffect",{Name="Master_ColdBloom",Intensity=0.18,Size=18,Threshold=1.35})
+    AddGraphicEffect("ColorCorrectionEffect",{Name="Luxz_ColdColor",Contrast=0.17,Saturation=0.08,TintColor=Color3.fromRGB(185,215,255)})
+    AddGraphicEffect("BloomEffect",{Name="Luxz_ColdBloom",Intensity=0.18,Size=18,Threshold=1.35})
 end
 
 local function ApplyLowGraphics()
-    DestroyMasterGraphicEffects()
+    DestroyLuxzGraphicEffects()
     GraphicsMode = "LOW"
     Lighting.GlobalShadows = false
     Lighting.FogStart = 0
@@ -879,7 +884,7 @@ local function ApplyPlasticMode()
 end
 
 local function ApplyPlasticLite()
-    DestroyMasterGraphicEffects()
+    DestroyLuxzGraphicEffects()
     GraphicsMode = "PLASTIC_LITE"
     Lighting.GlobalShadows = false
     for _, obj in ipairs(Workspace:GetDescendants()) do
@@ -962,7 +967,7 @@ local EI = Instance.new("TextLabel")
 EI.Size = UDim2.new(1,0,0,85)
 EI.Position = UDim2.new(0,0,.33,0)
 EI.BackgroundTransparency = 1
-EI.Text = "Creator: Master\nRoblox: TCS_SKILLS777\nFriends: juniinxz_99"
+EI.Text = "Creator: Master\nRoblox: Masterzin\nFriends: juniinxz_99"
 EI.Font = Enum.Font.GothamMedium
 EI.TextSize = 16
 EI.TextColor3 = Color3.fromRGB(220,220,220)
@@ -1017,7 +1022,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1,-80,0,28)
 Title.Position = UDim2.fromOffset(20,5)
 Title.BackgroundTransparency = 1
-Title.Text = "LUXZ HUB"
+Title.Text = "MASTER HUB"
 Title.Font = Enum.Font.GothamBlack
 Title.TextSize = 23
 Title.TextColor3 = Color3.new(1,1,1)
@@ -1028,7 +1033,7 @@ local Info = Instance.new("TextLabel")
 Info.Size = UDim2.new(1,-90,0,45)
 Info.Position = UDim2.fromOffset(20,32)
 Info.BackgroundTransparency = 1
-Info.Text = "Creator: Master\nRoblox: TCS_SKILLS777\nFriends: juniinxz_99"
+Info.Text = "Creator: Master\nRoblox: Masterzin\nFriends: juniinxz_99"
 Info.Font = Enum.Font.GothamMedium
 Info.TextSize = 11
 Info.TextColor3 = Color3.fromRGB(200,200,200)
@@ -1189,7 +1194,7 @@ end
 local function RemoveBallFire()
     BallFireEnabled = false
     for _, v in ipairs(Workspace:GetDescendants()) do
-        if v.Name == "MasterBallFire" or v.Name == "MasterFire" then
+        if v.Name == "LuxzBallFire" or v.Name == "LuxzFire" then
             pcall(function()
                 v:Destroy()
             end)
@@ -1197,7 +1202,7 @@ local function RemoveBallFire()
     end
 end
 
-local function DestroyMasterInstances()
+local function DestroyLuxzInstances()
     local roots = {Player:FindFirstChild("PlayerGui"), Lighting, Workspace}
 
     pcall(function()
@@ -1216,12 +1221,12 @@ local function DestroyMasterInstances()
                 local name = tostring(obj.Name)
 
                 if name == "MasterHub"
-                    or name == "LuxzHubExit"
-                    or name == "LuxzFollowToggle"
-                    or name == "LuxzFollowLock"
-                    or name == "LuxzBallFire"
-                    or name == "LuxzrFire"
-                    or name == "LuxzSky"
+                    or name == "MasterHubExit"
+                    or name == "MasterFollowToggle"
+                    or name == "MasterFollowLock"
+                    or name == "MasterBallFire"
+                    or name == "MasterFire"
+                    or name == "MasterSky"
                     or string.sub(name, 1, 5) == "Master_"
                 then
                     pcall(function()
@@ -1305,7 +1310,7 @@ local function DestroyHubGui()
         end
     end)
 
-    pcall(DestroyMasterInstances)
+    pcall(DestroyLuxzInstances)
 end
 
 local function HardClear()
@@ -1316,14 +1321,14 @@ local function HardClear()
     RestoreHubChanges()
     DestroyHubGui()
 
-    ENV.MASTER_HUB_CLEANUP = nil
+    ENV.LUXZ_HUB_CLEANUP = nil
 
     pcall(function()
         collectgarbage("collect")
     end)
 end
 
-ENV.MASTER_HUB_CLEANUP = function()
+ENV.LUXZ_HUB_CLEANUP = function()
     if HubCleared then return end
     HardClear()
 end
@@ -1332,7 +1337,7 @@ local function FinishHub()
     if HubCleared then return end
 
     local exitGui = Instance.new("ScreenGui")
-    exitGui.Name = "MASTER_HUBExitScreen"
+    exitGui.Name = "LuxzHubExitScreen"
     exitGui.ResetOnSpawn = false
     exitGui.IgnoreGuiInset = true
     exitGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -1504,7 +1509,7 @@ Toggle.Parent = GUI
 Corner(Toggle,15)
 
 FloatingFollowButton = Instance.new("TextButton")
-FloatingFollowButton.Name = "MasterFollowToggle"
+FloatingFollowButton.Name = "LuxzFollowToggle"
 FloatingFollowButton.Size = UDim2.fromOffset(150,48)
 FloatingFollowButton.Position = UDim2.new(1,-170,1,-80)
 FloatingFollowButton.BackgroundColor3 = Color3.fromRGB(130,25,35)
